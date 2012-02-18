@@ -1,0 +1,14 @@
+/*
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE GROUP LICENSE" (Revision 1):
+ * <indicore@gmail.com> wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. 
+ * If you do change it add your name to the beer list,	if you meet someone on 
+ * the list some day, and you think this stuff is worth it, you can buy them a 
+ * beer in return
+ * ----------------------------------------------------------------------------
+ */
+
+BEER LIST:
+
+Kris Gay <indicore@gmail.com> - original dev
