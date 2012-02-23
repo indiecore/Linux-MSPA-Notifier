@@ -22,7 +22,7 @@ def getRSSUpdate():
 	return ET.tostring(newestItem)
 
 def pictureSelect():
-	widgetIcon = GdkPixbuf.Pixbuf.new_from_file("Macros/"+random.choice(os.listdir("Macros/")))
+	widgetIcon = GdkPixbuf.Pixbuf.new_from_file(os.getcwd()+"/Macros/"+random.choice(os.listdir(os.getcwd()+"/Macros/")))
 	return widgetIcon
 
 def messageSelect():
@@ -34,6 +34,7 @@ def messageSelect():
 		return "MSPA Update"
 
 def popUpdate(timeout):
+	print(os.getcwd())
         Notify.init("UPDATE")
 	message = messageSelect()
         update = Notify.Notification.new("MSPA",message,"")
