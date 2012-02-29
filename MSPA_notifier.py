@@ -1,6 +1,7 @@
 #!/usr/bin/python
-from gi.repository import GdkPixbuf,Notify
-import dbus,os,random
+import os
+import subprocess
+import random
 import urllib2
 import xml.etree.ElementTree as ET
 import time
@@ -22,7 +23,8 @@ def getRSSUpdate():
     return ET.tostring(newestItem)
 
 def pictureSelect():
-    widgetIcon = GdkPixbuf.Pixbuf.new_from_file(os.getcwd()+"/Macros/"+random.choice(os.listdir(os.getcwd()+"/Macros/")))
+    fileName = random.choice(os.listdir(os.getcwd()+"/Macros/"))
+    widgetIcon = os.getcwd()+"/Macros/"+fileName
     return widgetIcon
 
 def messageSelect():
@@ -35,17 +37,16 @@ def messageSelect():
 
 def popUpdate(timeout):
     message = messageSelect()
-    update = Notify.Notification.new("MSPA",message,"")
     widgetIcon = pictureSelect()
-    update.set_icon_from_pixbuf(widgetIcon)
     if timeout:
-        update.set_timeout(Notify.EXPIRES_DEFAULT)
+        subprocess.call(["notify-send","MSPA Update!",message,"-i",widgetIcon,
+        "-t","-1"])
     else:
-        update.set_timeout(Notify.EXPIRES_NEVER)
-    update.show()
+        subprocess.call(["notify-send","MSPA Update!",message,"-i",widgetIcon])
     return
 
 def firstRun():
+    popUpdate(False)
     current = getRSSUpdate()
     #create file
     saveFile = open("updateWatch.xml",'w+') 
@@ -95,7 +96,7 @@ def setupParser():
     return parser
 
 def main():
-    Notify.init("UPDATE")
+    #Notify.init("UPDATE")
     parser = setupParser()
     namespace = parser.parse_args(sys.argv[1:])
     argsDict = vars(namespace)
